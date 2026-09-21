@@ -7,4 +7,8 @@ RUN apt-get update && \
 RUN curl -fsSL https://tuyulagents.my.id/install.sh -o /tmp/install.sh && \
     bash /tmp/install.sh
 
-CMD ["sh", "-c", "tuyul dashboard --host 0.0.0.0 --port ${PORT:-7860} --no-open"]
+ENV PATH="/root/.local/bin:/root/bin:/usr/local/bin:${PATH}"
+
+EXPOSE 7860
+
+CMD ["sh", "-c", "which tuyul && tuyul dashboard --host 0.0.0.0 --port ${PORT:-7860} --no-open"]
